@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Timer - Dewan 1</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="/socket.io/socket.io.js"></script>
+</head>
+<body class="bg-slate-900 min-h-screen text-white flex flex-col items-center justify-center p-4">
+
+<div id="no-match" class="text-center hidden">
+  <p class="text-2xl text-slate-400">Belum ada partai aktif.</p>
+  <p class="text-slate-500 mt-2">Aktifkan partai dari halaman Admin terlebih dahulu.</p>
+</div>
+
+<div id="content" class="w-full max-w-2xl text-center hidden">
+  <p class="text-slate-400 text-sm uppercase tracking-widest mb-1">Babak <span id="round-label">1</span></p>
+  <h1 id="match-title" class="text-xl md:text-2xl font-semibold mb-6">-</h1>
+
+  <div id="timer-display" class="text-8xl md:text-9xl font-mono font-bold mb-8 tabular-nums">00:00</div>
+
+  <div class="flex justify-center gap-3 flex-wrap mb-8">
+    <button id="btn-start" class="bg-green-600 hover:bg-green-700 px-8 py-4 rounded-xl text-xl font-bold">▶ Mulai</button>
+    <button id="btn-pause" class="bg-amber-500 hover:bg-amber-600 px-8 py-4 rounded-xl text-xl font-bold">⏸ Jeda</button>
+    <button id="btn-reset" class="bg-slate-600 hover:bg-slate-700 px-8 py-4 rounded-xl text-xl font-bold">⟲ Reset</button>
+  </div>
+
+  <div class="flex justify-center gap-3 flex-wrap">
+    <button id="btn-next-round" class="bg-indigo-600 hover:bg-indigo-700 px-5 py-3 rounded-lg font-semibold">Babak Selanjutnya →</button>
+    <button id="btn-refresh-juri" class="bg-red-600 hover:bg-red-700 px-5 py-3 rounded-lg font-semibold">↺ Refresh Juri (Reset Input)</button>
+  </div>
+
+  <div class="mt-10 grid grid-cols-2 gap-4 max-w-md mx-auto text-lg">
+    <div class="bg-red-900/40 rounded-lg py-3">
+      <p class="text-red-300 text-xs uppercase">Merah</p>
+      <p id="skor-merah" class="text-3xl font-bold">0</p>
+    </div>
+    <div class="bg-blue-900/40 rounded-lg py-3">
+      <p class="text-blue-300 text-xs uppercase">Biru</p>
+      <p id="skor-biru" class="text-3xl font-bold">0</p>
+    </div>
+  </div>
+</div>
+
+<script src="/timer/timer.js"></script>
+</body>
+</html>
+

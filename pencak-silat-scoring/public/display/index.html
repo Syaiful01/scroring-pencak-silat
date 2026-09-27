@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Display - Pencak Silat Scoring</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="/socket.io/socket.io.js"></script>
+<link rel="stylesheet" href="/display/display.css">
+</head>
+<body>
+<div id="no-match" class="hidden min-h-screen grid place-items-center text-center bg-slate-950 text-white"><div><p class="text-4xl font-black tracking-wide">MENUNGGU PARTAI</p><p class="text-slate-400 mt-3 text-lg">Aktifkan partai dari halaman Admin.</p></div></div>
+<div id="content" class="hidden board">
+<header class="top"><div>GELANGGANG A</div><div class="title">Pencak silat</div><div id="kelas-label">TANDING KELAS</div></header>
+<section class="head"><div class="fighter"><div class="avatar blue">B</div><div><p class="label">Pesilat X</p><p id="biru-nama" class="name">-</p><p id="biru-kontingen" class="camp">-</p></div></div><div class="timer"><div id="timer-display">00:00</div></div><div class="fighter right"><div><p class="label">Pesilat X</p><p id="merah-nama" class="name">-</p><p id="merah-kontingen" class="camp">-</p></div><div class="avatar red">M</div></div></section>
+<main class="main"><div class="side"><div class="row"><div class="cell">+1</div><div class="cell">+2</div></div><div class="row"><div class="cell">T1</div><div class="cell">T2</div></div><div class="row"><div class="cell">P1</div><div class="cell">P2</div></div></div><section class="score blue"><div id="biru-skor" class="num">0</div><div id="biru-hukuman" class="penalty"></div></section><div class="mid"><div class="round now">I</div><div class="round">II</div><div class="round">III</div><div class="round">Round <span id="round-label">1</span></div><div class="round big">X</div></div><section class="score red"><div id="merah-skor" class="num">0</div><div id="merah-hukuman" class="penalty"></div></section><div class="side"><div class="row"><div class="cell">+1</div><div class="cell">+2</div></div><div class="row"><div class="cell">T1</div><div class="cell">T2</div></div><div class="row"><div class="cell">P1</div><div class="cell">P2</div></div></div></main>
+<section class="judges"><div class="judge">J1</div><div class="judge">J2</div><div class="judge">J3</div><div class="judge">J1</div><div class="judge">J2</div><div class="judge">J3</div><div class="judge">J1</div><div class="judge">J2</div><div class="judge">J3</div><div class="judge">J1</div><div class="judge">J2</div><div class="judge">J3</div></section>
+<div id="poin-indicator" class="hidden"><div id="poin-text" class="score-pop"></div></div>
+</div>
+<div id="winner-overlay" class="hidden fixed inset-0 bg-black/90 flex items-center justify-center z-50 text-white"><div class="text-center"><p class="text-3xl text-slate-300 mb-4">PEMENANG</p><p id="winner-name" class="text-7xl font-black mb-3">-</p><p id="winner-method" class="text-2xl text-amber-400">-</p></div></div>
+<script src="/display/display.js"></script>
+</body>
+</html>

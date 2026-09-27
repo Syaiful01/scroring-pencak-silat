@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Tablet Juri</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="/socket.io/socket.io.js"></script>
+<style>
+  button:active { transform: scale(0.95); }
+  .flash-red { animation: flashRed 0.4s ease; }
+  .flash-blue { animation: flashBlue 0.4s ease; }
+  @keyframes flashRed { 0%{background-color:#fca5a5} 100%{background-color:transparent} }
+  @keyframes flashBlue { 0%{background-color:#93c5fd} 100%{background-color:transparent} }
+</style>
+</head>
+<body class="bg-slate-100 min-h-screen select-none">
+
+<div id="no-match" class="hidden flex items-center justify-center min-h-screen text-center p-6">
+  <div>
+    <p class="text-2xl text-slate-500 font-semibold">Menunggu partai aktif...</p>
+    <p class="text-slate-400 mt-2">Admin belum mengaktifkan partai.</p>
+  </div>
+</div>
+
+<div id="content" class="hidden">
+  <header class="bg-slate-800 text-white text-center py-3">
+    <p class="text-sm text-slate-300">JURI <span id="juri-id" class="font-bold text-white">#</span></p>
+    <p id="match-title" class="text-lg font-semibold">-</p>
+    <div class="mt-2 inline-flex items-center gap-2 rounded-lg bg-slate-700 px-4 py-1.5">
+      <span class="text-xs uppercase tracking-widest text-slate-300">Waktu</span>
+      <span id="timer-display" class="font-mono text-2xl font-black tabular-nums">00:00</span>
+      <span id="timer-status" class="text-xs text-emerald-300">SIAP</span>
+    </div>
+  </header>
+
+  <main class="grid grid-cols-2 gap-3 p-3 min-h-[calc(100vh-64px)]">
+    <!-- SUDUT MERAH -->
+    <div id="panel-merah" class="bg-red-50 rounded-2xl border-4 border-red-300 flex flex-col p-3 gap-3">
+      <h2 class="text-center font-bold text-red-700 text-lg">SUDUT MERAH</h2>
+      <button data-sudut="merah" data-jenis="pukulan" class="score-btn flex-1 bg-red-500 hover:bg-red-600 text-white rounded-xl text-3xl font-bold shadow-lg">
+        PUKULAN<br><span class="text-xl">+1</span>
+      </button>
+      <button data-sudut="merah" data-jenis="tendangan" class="score-btn flex-1 bg-red-700 hover:bg-red-800 text-white rounded-xl text-3xl font-bold shadow-lg">
+        TENDANGAN<br><span class="text-xl">+2</span>
+      </button>
+    </div>
+
+    <!-- SUDUT BIRU -->
+    <div id="panel-biru" class="bg-blue-50 rounded-2xl border-4 border-blue-300 flex flex-col p-3 gap-3">
+      <h2 class="text-center font-bold text-blue-700 text-lg">SUDUT BIRU</h2>
+      <button data-sudut="biru" data-jenis="pukulan" class="score-btn flex-1 bg-blue-500 hover:bg-blue-600 text-white rounded-xl text-3xl font-bold shadow-lg">
+        PUKULAN<br><span class="text-xl">+1</span>
+      </button>
+      <button data-sudut="biru" data-jenis="tendangan" class="score-btn flex-1 bg-blue-700 hover:bg-blue-800 text-white rounded-xl text-3xl font-bold shadow-lg">
+        TENDANGAN<br><span class="text-xl">+2</span>
+      </button>
+    </div>
+  </main>
+</div>
+
+<!-- MODAL VERIFIKASI -->
+<div id="verif-modal" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center p-4 z-50">
+  <div class="bg-white rounded-2xl p-6 max-w-sm w-full text-center">
+    <p class="text-xl font-bold text-slate-800 mb-1">🔔 VERIFIKASI</p>
+    <p id="verif-tipe" class="text-slate-500 mb-5">-</p>
+    <div class="grid grid-cols-1 gap-3">
+      <button data-vote="merah" class="verif-btn bg-red-500 hover:bg-red-600 text-white py-4 rounded-xl font-bold text-lg">SUDUT MERAH</button>
+      <button data-vote="biru" class="verif-btn bg-blue-500 hover:bg-blue-600 text-white py-4 rounded-xl font-bold text-lg">SUDUT BIRU</button>
+      <button data-vote="invalid" class="verif-btn bg-slate-400 hover:bg-slate-500 text-white py-4 rounded-xl font-bold text-lg">INVALID</button>
+    </div>
+    <p id="verif-voted" class="hidden text-green-600 font-semibold mt-4">✓ Vote terkirim, menunggu ketua...</p>
+  </div>
+</div>
+
+<script src="/juri/juri.js"></script>
+</body>
+</html>
+
